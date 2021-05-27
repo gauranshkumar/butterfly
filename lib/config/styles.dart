@@ -14,14 +14,13 @@ class BrandStyles {
 
   static final ThemeData themeData = ThemeData(
     primaryColor: BrandColors.blue,
-    accentColor: BrandColors.violet,
     textTheme: TextTheme(
-      bodyText1: bodyRegular,
-      subtitle1: subtitle,
-      headline1: headingRegular,
-      button: headingRegular,
-      headline2: headingBold,
-      bodyText2: bodyBold,
+      bodyText1: GoogleFonts.inter(),
+      subtitle1: GoogleFonts.inter(),
+      headline1: GoogleFonts.inter(),
+      button: GoogleFonts.inter(),
+      headline2: GoogleFonts.inter(),
+      bodyText2: GoogleFonts.inter(),
     ),
   );
 }

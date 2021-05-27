@@ -5,7 +5,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 class FirebaseService {
   Future<bool> login() async {
     var userCredential;
-
     try {
       final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -26,7 +25,6 @@ class FirebaseService {
           .doc(FirebaseAuth.instance.currentUser.uid)
           .set({'empty-data': 'data'});
     }
-
     return userCredential != null;
   }
 }
