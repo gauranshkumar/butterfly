@@ -1,3 +1,5 @@
+import 'package:butterfly/config/colors.dart';
+import 'package:butterfly/config/icons.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,7 +8,17 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Text("Hello"),
+          child: Column(
+            children: [
+              Text("Hello"),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    BrandIcons.award,
+                    color: BrandColors.blue,
+                  ))
+            ],
+          ),
         ),
       ),
     );
