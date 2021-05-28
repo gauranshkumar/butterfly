@@ -1,10 +1,11 @@
+import 'package:butterfly/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class FirebaseService {
+class LoginService {
   Future<bool> login() async {
-    var userCredential;
+    UserCredential userCredential;
     try {
       final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -20,10 +21,16 @@ class FirebaseService {
     }
 
     if (userCredential != null) {
-      FirebaseFirestore.instance
+      final isAlreadyPresent = await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
-          .set({'empty-data': 'data'});
+          .get();
+      if (isAlreadyPresent == null) {
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser.uid)
+            .set(ButterflyUser.fromFirebaseUser(userCredential.user).toMap());
+      }
     }
     return userCredential != null;
   }
