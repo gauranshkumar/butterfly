@@ -3,23 +3,21 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:butterfly/models/comment.dart';
-
 class Post {
   final String uid;
   final String title;
   final String description;
   final String category;
-  final int support;
-  final int appreciate;
-  final List<Comment> comments;
+  final List<String> supportIdArray;
+  final List<String> appreciateIdArray;
+  final List<String> comments;
   Post({
     this.uid = '',
     this.title = '',
     this.description = '',
     this.category = '',
-    this.support = 0,
-    this.appreciate = 0,
+    this.supportIdArray = const [],
+    this.appreciateIdArray = const [],
     this.comments = const [],
   });
 
@@ -28,56 +26,56 @@ class Post {
     String title,
     String description,
     String category,
-    int support,
-    int appreciate,
-    List<Comment> comments,
+    List<String> supportIdArray,
+    List<String> appreciateIdArray,
+    List<String> comments,
   }) {
     return Post(
       uid: uid ?? this.uid,
       title: title ?? this.title,
       description: description ?? this.description,
       category: category ?? this.category,
-      support: support ?? this.support,
-      appreciate: appreciate ?? this.appreciate,
+      supportIdArray: supportIdArray ?? this.supportIdArray,
+      appreciateIdArray: appreciateIdArray ?? this.appreciateIdArray,
       comments: comments ?? this.comments,
     );
   }
 
+  int get supportNumber => supportIdArray.length;
+
+  int get appreciateNumber => appreciateIdArray.length;
+
   Map<String, dynamic> toMap() {
     return {
-      'uid': uid,
       'title': title,
       'description': description,
       'category': category,
-      'support': support,
-      'appreciate': appreciate,
-      'comments': comments?.map((x) => x.toMap())?.toList(),
+      'supportIdArray': supportIdArray,
+      'appreciateIdArray': appreciateIdArray,
+      'comments': comments,
     };
   }
 
   factory Post.fromMap(Map<String, dynamic> map) {
     return Post(
-      uid: map['uid'],
       title: map['title'],
       description: map['description'],
       category: map['category'],
-      support: map['support'],
-      appreciate: map['appreciate'],
-      comments:
-          List<Comment>.from(map['comments']?.map((x) => Comment.fromMap(x))),
+      supportIdArray: List<String>.from(map['supportIdArray']),
+      appreciateIdArray: List<String>.from(map['appreciateIdArray']),
+      comments: List<String>.from(map['comments']),
     );
   }
 
   factory Post.fromFirebase(QueryDocumentSnapshot document) {
     return Post(
-      uid: document['uid'],
+      uid: document.id,
       title: document['title'],
       description: document['description'],
       category: document['category'],
-      support: document['support'],
-      appreciate: document['appreciate'],
-      // comments: List<Comment>.from(
-      //     document['comments']?.map((x) => Comment.fromMap(x))),
+      supportIdArray: List<String>.from(document['supportIdArray']),
+      appreciateIdArray: List<String>.from(document['appreciateIdArray']),
+      comments: List<String>.from(document['comments']),
     );
   }
 
@@ -87,7 +85,7 @@ class Post {
 
   @override
   String toString() {
-    return 'Post(uid: $uid, title: $title, description: $description, category: $category, support: $support, appreciate: $appreciate, comments: $comments)';
+    return 'Post(uid: $uid, title: $title, description: $description, category: $category, supportIdArray: $supportIdArray, appreciateIdArray: $appreciateIdArray, comments: $comments)';
   }
 
   @override
@@ -99,8 +97,8 @@ class Post {
         other.title == title &&
         other.description == description &&
         other.category == category &&
-        other.support == support &&
-        other.appreciate == appreciate &&
+        listEquals(other.supportIdArray, supportIdArray) &&
+        listEquals(other.appreciateIdArray, appreciateIdArray) &&
         listEquals(other.comments, comments);
   }
 
@@ -110,8 +108,8 @@ class Post {
         title.hashCode ^
         description.hashCode ^
         category.hashCode ^
-        support.hashCode ^
-        appreciate.hashCode ^
+        supportIdArray.hashCode ^
+        appreciateIdArray.hashCode ^
         comments.hashCode;
   }
 }

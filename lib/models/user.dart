@@ -8,6 +8,7 @@ class ButterflyUser {
   final String email;
   final int rewardCoins;
   final bool isDoctor;
+  final String profilePictureUrl;
 
   ButterflyUser({
     this.name = '',
@@ -15,6 +16,7 @@ class ButterflyUser {
     this.email = '',
     this.rewardCoins = 0,
     this.isDoctor = false,
+    this.profilePictureUrl = '',
   });
 
   ButterflyUser copyWith({
@@ -23,6 +25,7 @@ class ButterflyUser {
     String email,
     int rewardCoins,
     bool isDoctor,
+    String profilePictureUrl,
   }) {
     return ButterflyUser(
       name: name ?? this.name,
@@ -30,6 +33,7 @@ class ButterflyUser {
       email: email ?? this.email,
       rewardCoins: rewardCoins ?? this.rewardCoins,
       isDoctor: isDoctor ?? this.isDoctor,
+      profilePictureUrl: profilePictureUrl ?? this.profilePictureUrl,
     );
   }
 
@@ -40,6 +44,7 @@ class ButterflyUser {
       'email': email,
       'rewardCoins': rewardCoins,
       'isDoctor': isDoctor,
+      'profilePictureUrl': profilePictureUrl,
     };
   }
 
@@ -50,6 +55,7 @@ class ButterflyUser {
       email: map['email'],
       rewardCoins: map['rewardCoins'],
       isDoctor: map['isDoctor'],
+      profilePictureUrl: map['profilePictureUrl'],
     );
   }
 
@@ -60,6 +66,7 @@ class ButterflyUser {
       email: user.email,
       rewardCoins: 0,
       isDoctor: false,
+      profilePictureUrl: user.photoURL,
     );
   }
 
@@ -70,7 +77,7 @@ class ButterflyUser {
 
   @override
   String toString() {
-    return 'ButterflyUser(name: $name, uid: $uid, email: $email, rewardCoins: $rewardCoins, isDoctor: $isDoctor)';
+    return 'ButterflyUser(name: $name, uid: $uid, email: $email, rewardCoins: $rewardCoins, isDoctor: $isDoctor, profilePictureUrl: $profilePictureUrl)';
   }
 
   @override
@@ -82,7 +89,8 @@ class ButterflyUser {
         other.uid == uid &&
         other.email == email &&
         other.rewardCoins == rewardCoins &&
-        other.isDoctor == isDoctor;
+        other.isDoctor == isDoctor &&
+        other.profilePictureUrl == profilePictureUrl;
   }
 
   @override
@@ -91,6 +99,7 @@ class ButterflyUser {
         uid.hashCode ^
         email.hashCode ^
         rewardCoins.hashCode ^
-        isDoctor.hashCode;
+        isDoctor.hashCode ^
+        profilePictureUrl.hashCode;
   }
 }

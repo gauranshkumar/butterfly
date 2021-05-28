@@ -1,7 +1,9 @@
 import 'package:butterfly/routes/route_names.dart';
 import 'package:butterfly/view_models/login/login_view_model.dart';
+import 'package:butterfly/view_models/new_post/create_post_view_model.dart';
 import 'package:butterfly/views/home/home_page.dart';
 import 'package:butterfly/views/login/login_page.dart';
+import 'package:butterfly/views/new_post/create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +27,13 @@ class Routes {
             child: LoginPage(
               loginViewModel: LoginViewModel(),
             ),
+          ),
+        );
+      case RouteNames.createPost:
+        return CustomRoute<bool>(
+          builder: (BuildContext context) => ChangeNotifierProvider(
+            create: (context) => CreatePostViewModel(),
+            child: CreatePostPage(),
           ),
         );
       default:
