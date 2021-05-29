@@ -2,11 +2,13 @@ import 'package:butterfly/routes/route_names.dart';
 import 'package:butterfly/view_models/feed/feed_item_view_model.dart';
 import 'package:butterfly/view_models/feed/feed_list_view_model.dart';
 import 'package:butterfly/view_models/feed/feed_view_model.dart';
+import 'package:butterfly/view_models/album_page/album_page_model.dart';
 import 'package:butterfly/view_models/login/login_view_model.dart';
 import 'package:butterfly/view_models/new_post/create_post_view_model.dart';
 import 'package:butterfly/view_models/user/user_view_model.dart';
 import 'package:butterfly/views/home/home_page.dart';
 import 'package:butterfly/views/login/login_page.dart';
+import 'package:butterfly/views/music/album_screen.dart';
 import 'package:butterfly/views/new_post/create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,6 +50,13 @@ class Routes {
           builder: (BuildContext context) => ChangeNotifierProvider(
             create: (context) => CreatePostViewModel(),
             child: CreatePostPage(),
+          ),
+        );
+      case RouteNames.albumPage:
+        return CustomRoute<bool>(
+          builder: (BuildContext context) => ChangeNotifierProvider(
+            create: (context) => AlbumViewModel(),
+            child: AlbumScreen(),
           ),
         );
       default:
