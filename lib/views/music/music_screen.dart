@@ -1,5 +1,6 @@
 import 'package:butterfly/config/colors.dart';
 import 'package:butterfly/models/music_card.dart';
+import 'package:butterfly/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -29,20 +30,14 @@ class _CardState extends State<Card> {
           mainAxisSpacing: 10,
           itemCount: _cardList.length,
           itemBuilder: (context, index) {
-            return Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: cards[index].background),
-              child: TextButton(
-                onPressed: () => {
-                  // TODO: Add route for songs page
-                  print(
-                    "${_cardList[index].title} pressed",
-                  )
-                },
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-                ),
+            return GestureDetector(
+              onTap: () => {
+                Navigator.pushNamed(context, RouteNames.albumPage),
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: cards[index].background),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

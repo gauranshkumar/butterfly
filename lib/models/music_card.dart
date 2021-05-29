@@ -21,7 +21,7 @@ class MusicCard {
 List<MusicCard> cards = [
   MusicCard(
       illustration: Image.asset("assets/low_mood.png"),
-      title: "Bad Mood",
+      title: "Low Mood",
       background: BrandColors.lightGreen,
       subTitle: "Uplift your Sadness",
       music: []),
@@ -29,7 +29,7 @@ List<MusicCard> cards = [
       illustration: Image.asset("assets/anxiety.png"),
       title: "Anxiety",
       background: BrandColors.lightRed,
-      subTitle: "Heal from Amxiety",
+      subTitle: "Heal from Anxiety",
       music: []),
   MusicCard(
       illustration: Image.asset("assets/work_life.png"),
