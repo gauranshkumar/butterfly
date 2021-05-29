@@ -11,4 +11,6 @@ class BrandColors {
   static const Color lightYellow = Color(0xFFF6F7D1);
   static const Color lightViolet = Color(0xFFEDD1F7);
   static const Color lightBlue = Color(0xFFD1E9F7);
+  static const Color yellow = Color(0xFFEFC903);
+  static const Color lightOrange = Color(0xFFFFF5C1);
 }

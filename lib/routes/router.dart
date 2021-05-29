@@ -1,4 +1,5 @@
 import 'package:butterfly/routes/route_names.dart';
+import 'package:butterfly/view_models/feed/comment_view_model.dart';
 import 'package:butterfly/view_models/feed/feed_item_view_model.dart';
 import 'package:butterfly/view_models/feed/feed_list_view_model.dart';
 import 'package:butterfly/view_models/feed/feed_view_model.dart';
@@ -6,10 +7,12 @@ import 'package:butterfly/view_models/album_page/album_page_model.dart';
 import 'package:butterfly/view_models/login/login_view_model.dart';
 import 'package:butterfly/view_models/new_post/create_post_view_model.dart';
 import 'package:butterfly/view_models/user/user_view_model.dart';
+import 'package:butterfly/views/feed/widgets/comment_screen.dart';
 import 'package:butterfly/views/home/home_page.dart';
 import 'package:butterfly/views/login/login_page.dart';
 import 'package:butterfly/views/music/album_screen.dart';
 import 'package:butterfly/views/new_post/create_post.dart';
+import 'package:butterfly/views/psy_tests/take_test.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,15 +26,18 @@ class Routes {
   // }
 
   static Route onGenerateRoute(RouteSettings settings) {
+    final feedItemViewModel = FeedItemViewModel();
+    final userViewModel = UserViewModel();
+    var feedListViewModel = FeedListViewModel();
     switch (settings.name) {
       case RouteNames.homePage:
         return CustomRoute<bool>(builder: (BuildContext context) {
           return MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (context) => FeedViewModel()),
-              ChangeNotifierProvider(create: (context) => FeedListViewModel()),
-              ChangeNotifierProvider(create: (context) => FeedItemViewModel()),
-              ChangeNotifierProvider(create: (context) => UserViewModel()),
+              ChangeNotifierProvider(create: (context) => feedListViewModel),
+              ChangeNotifierProvider(create: (context) => feedItemViewModel),
+              ChangeNotifierProvider(create: (context) => userViewModel),
               ChangeNotifierProvider(create: (context) => AlbumViewModel()),
             ],
             child: HomePage(),
@@ -60,6 +66,15 @@ class Routes {
             child: AlbumScreen(),
           ),
         );
+      case RouteNames.commentPage:
+        return CustomRoute<bool>(
+          builder: (BuildContext context) => ChangeNotifierProvider(
+            create: (context) => feedItemViewModel,
+            child: CommentScreen(),
+          ),
+        );
+      case RouteNames.takeTest:
+        return CustomRoute<bool>(builder: (BuildContext context) => TakeTest());
       default:
         return onUnknownRoute(const RouteSettings(name: '/invalid'));
     }

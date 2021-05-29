@@ -6,10 +6,14 @@ import 'package:butterfly/view_models/feed/feed_item_view_model.dart';
 import 'package:butterfly/view_models/feed/feed_list_view_model.dart';
 import 'package:butterfly/view_models/feed/feed_view_model.dart';
 import 'package:butterfly/view_models/user/user_view_model.dart';
+import 'package:butterfly/views/feed/widgets/comment_screen.dart';
+import 'package:butterfly/views/feed/widgets/profile_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class FeedScreen extends StatelessWidget {
+  TextEditingController _commentController = TextEditingController();
   Size size;
   @override
   Widget build(BuildContext context) {
@@ -52,12 +56,12 @@ class FeedScreen extends StatelessWidget {
               feedList[index].supportPost();
               feedList[index].appreciatePost();
             },
-            child: _buildListItem(feedList[index])),
+            child: _buildListItem(context, feedList[index])),
         separatorBuilder: (context, index) => Divider(),
         itemCount: feedList.length);
   }
 
-  Widget _buildListItem(FeedItemViewModel feedItem) {
+  Widget _buildListItem(context, FeedItemViewModel feedItem) {
     var supportStyle = feedItem.isSupported ? Colors.red : Colors.black;
     var appreciateStyle = feedItem.isAppreciated ? Colors.yellow : Colors.black;
     return Container(
@@ -76,13 +80,7 @@ class FeedScreen extends StatelessWidget {
                       return Expanded(
                         child: Row(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(24),
-                              child: Image.network(
-                                snapshot.data.profilePictureUrl,
-                                width: 32,
-                              ),
-                            ),
+                            ProfileIcon(snapshot.data.name),
                             SizedBox(width: 6),
                             Text(snapshot.data.name),
                             Spacer(),
@@ -104,7 +102,7 @@ class FeedScreen extends StatelessWidget {
               ],
             );
           }),
-          SizedBox(height: 8),
+          SizedBox(height: 12),
           Padding(
             padding: EdgeInsets.only(left: 12),
             child: Text(
@@ -120,7 +118,7 @@ class FeedScreen extends StatelessWidget {
               style: BrandStyles.subtitle,
             ),
           ),
-          _activityOnPost(feedItem, supportStyle, appreciateStyle),
+          _activityOnPost(feedItem, supportStyle, appreciateStyle, context),
           Consumer<UserViewModel>(builder: (context, user, child) {
             return Row(
               mainAxisSize: MainAxisSize.min,
@@ -145,10 +143,17 @@ class FeedScreen extends StatelessWidget {
                   width: size.width * .7,
                   height: 30,
                   child: TextField(
+                    controller: _commentController,
                     cursorColor: BrandColors.black,
                     decoration: InputDecoration(
                       suffix: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          if (_commentController.text.isNotEmpty) {
+                            feedItem.postComment(_commentController.text);
+                            _commentController.text = "";
+                            Fluttertoast.showToast(msg: "Comment Posted");
+                          }
+                        },
                         child: Text(
                           'Post',
                           style: TextStyle(
@@ -192,8 +197,8 @@ class FeedScreen extends StatelessWidget {
     );
   }
 
-  Row _activityOnPost(
-      FeedItemViewModel feedItem, Color supportStyle, Color appreciateStyle) {
+  Row _activityOnPost(FeedItemViewModel feedItem, Color supportStyle,
+      Color appreciateStyle, context) {
     return Row(
       children: [
         IconButton(
@@ -209,6 +214,7 @@ class FeedScreen extends StatelessWidget {
           '${feedItem.supportIdArray.length} Support',
           style: BrandStyles.subtitle,
         ),
+        SizedBox(width: 16),
         IconButton(
           onPressed: () {
             feedItem.appreciatePost();
@@ -221,6 +227,23 @@ class FeedScreen extends StatelessWidget {
         Text(
           '${feedItem.appreciateIdArray.length} Appreciate',
           style: BrandStyles.subtitle,
+        ),
+        SizedBox(width: 16),
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (context) => feedItem,
+                  child: CommentScreen(),
+                ),
+              ),
+            );
+          },
+          icon: Icon(
+            Icons.comment_outlined,
+          ),
         ),
       ],
     );

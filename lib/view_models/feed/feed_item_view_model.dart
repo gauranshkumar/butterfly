@@ -1,3 +1,4 @@
+import 'package:butterfly/models/analysis.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -76,5 +77,19 @@ class FeedItemViewModel extends ChangeNotifier {
         )
       });
     }
+  }
+
+  void postComment(String text) {
+    FirebaseFirestore.instance.collection('posts').doc(uid).update({
+      'comments': FieldValue.arrayUnion([text])
+    });
+    final analysisData = Analysis.fromText(text);
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .update({
+      'rewardCoins': FieldValue.increment(analysisData.score),
+    });
+    notifyListeners();
   }
 }
