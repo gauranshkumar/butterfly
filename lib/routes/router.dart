@@ -32,6 +32,7 @@ class Routes {
               ChangeNotifierProvider(create: (context) => FeedListViewModel()),
               ChangeNotifierProvider(create: (context) => FeedItemViewModel()),
               ChangeNotifierProvider(create: (context) => UserViewModel()),
+              ChangeNotifierProvider(create: (context) => AlbumViewModel()),
             ],
             child: HomePage(),
           );
