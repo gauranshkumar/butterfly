@@ -11,6 +11,7 @@ class Post {
   final List<String> supportIdArray;
   final List<String> appreciateIdArray;
   final List<String> comments;
+  final String authorId;
   Post({
     this.uid = '',
     this.title = '',
@@ -19,6 +20,7 @@ class Post {
     this.supportIdArray = const [],
     this.appreciateIdArray = const [],
     this.comments = const [],
+    this.authorId = '',
   });
 
   Post copyWith({
@@ -29,6 +31,7 @@ class Post {
     List<String> supportIdArray,
     List<String> appreciateIdArray,
     List<String> comments,
+    String authorId,
   }) {
     return Post(
       uid: uid ?? this.uid,
@@ -38,6 +41,7 @@ class Post {
       supportIdArray: supportIdArray ?? this.supportIdArray,
       appreciateIdArray: appreciateIdArray ?? this.appreciateIdArray,
       comments: comments ?? this.comments,
+      authorId: authorId ?? this.authorId,
     );
   }
 
@@ -53,6 +57,7 @@ class Post {
       'supportIdArray': supportIdArray,
       'appreciateIdArray': appreciateIdArray,
       'comments': comments,
+      'authorId': authorId,
     };
   }
 
@@ -64,6 +69,7 @@ class Post {
       supportIdArray: List<String>.from(map['supportIdArray']),
       appreciateIdArray: List<String>.from(map['appreciateIdArray']),
       comments: List<String>.from(map['comments']),
+      authorId: map['authorId'],
     );
   }
 
@@ -76,6 +82,7 @@ class Post {
       supportIdArray: List<String>.from(document['supportIdArray']),
       appreciateIdArray: List<String>.from(document['appreciateIdArray']),
       comments: List<String>.from(document['comments']),
+      authorId: document['authorId'],
     );
   }
 
@@ -85,7 +92,7 @@ class Post {
 
   @override
   String toString() {
-    return 'Post(uid: $uid, title: $title, description: $description, category: $category, supportIdArray: $supportIdArray, appreciateIdArray: $appreciateIdArray, comments: $comments)';
+    return 'Post(uid: $uid, title: $title, description: $description, category: $category, supportIdArray: $supportIdArray, appreciateIdArray: $appreciateIdArray, comments: $comments, authorId: $authorId)';
   }
 
   @override
@@ -99,7 +106,8 @@ class Post {
         other.category == category &&
         listEquals(other.supportIdArray, supportIdArray) &&
         listEquals(other.appreciateIdArray, appreciateIdArray) &&
-        listEquals(other.comments, comments);
+        listEquals(other.comments, comments) &&
+        other.authorId == authorId;
   }
 
   @override
@@ -110,6 +118,7 @@ class Post {
         category.hashCode ^
         supportIdArray.hashCode ^
         appreciateIdArray.hashCode ^
-        comments.hashCode;
+        comments.hashCode ^
+        authorId.hashCode;
   }
 }

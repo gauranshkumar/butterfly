@@ -1,6 +1,10 @@
 import 'package:butterfly/routes/route_names.dart';
+import 'package:butterfly/view_models/feed/feed_item_view_model.dart';
+import 'package:butterfly/view_models/feed/feed_list_view_model.dart';
+import 'package:butterfly/view_models/feed/feed_view_model.dart';
 import 'package:butterfly/view_models/login/login_view_model.dart';
 import 'package:butterfly/view_models/new_post/create_post_view_model.dart';
+import 'package:butterfly/view_models/user/user_view_model.dart';
 import 'package:butterfly/views/home/home_page.dart';
 import 'package:butterfly/views/login/login_page.dart';
 import 'package:butterfly/views/new_post/create_post.dart';
@@ -19,7 +23,17 @@ class Routes {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteNames.homePage:
-        return CustomRoute<bool>(builder: (BuildContext context) => HomePage());
+        return CustomRoute<bool>(builder: (BuildContext context) {
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (context) => FeedViewModel()),
+              ChangeNotifierProvider(create: (context) => FeedListViewModel()),
+              ChangeNotifierProvider(create: (context) => FeedItemViewModel()),
+              ChangeNotifierProvider(create: (context) => UserViewModel()),
+            ],
+            child: HomePage(),
+          );
+        });
       case RouteNames.loginPage:
         return CustomRoute<bool>(
           builder: (BuildContext context) => ChangeNotifierProvider(

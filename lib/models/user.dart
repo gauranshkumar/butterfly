@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ButterflyUser {
@@ -49,6 +50,16 @@ class ButterflyUser {
   }
 
   factory ButterflyUser.fromMap(Map<String, dynamic> map) {
+    return ButterflyUser(
+      name: map['name'],
+      uid: map['uid'],
+      email: map['email'],
+      rewardCoins: map['rewardCoins'],
+      isDoctor: map['isDoctor'],
+      profilePictureUrl: map['profilePictureUrl'],
+    );
+  }
+  factory ButterflyUser.fromFirebase(QueryDocumentSnapshot map) {
     return ButterflyUser(
       name: map['name'],
       uid: map['uid'],

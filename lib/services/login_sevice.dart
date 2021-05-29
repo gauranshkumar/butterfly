@@ -21,16 +21,10 @@ class LoginService {
     }
 
     if (userCredential != null) {
-      final isAlreadyPresent = await FirebaseFirestore.instance
+      FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
-          .get();
-      if (isAlreadyPresent == null) {
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser.uid)
-            .set(ButterflyUser.fromFirebaseUser(userCredential.user).toMap());
-      }
+          .set(ButterflyUser.fromFirebaseUser(userCredential.user).toMap());
     }
     return userCredential != null;
   }

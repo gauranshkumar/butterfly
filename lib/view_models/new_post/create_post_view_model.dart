@@ -20,12 +20,8 @@ class CreatePostViewModel extends ChangeNotifier {
   String get currentTagTitle =>
       kQuestionTags.where((element) => element.isSelected != false).first.title;
   bool postQuestion(Post post) {
-    final docRef = FirebaseFirestore.instance
-        .collection('posts')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .collection('my-posts')
-        .doc()
-        .set(post.toMap());
+    final docRef =
+        FirebaseFirestore.instance.collection('posts').doc().set(post.toMap());
     return docRef != null;
   }
 }

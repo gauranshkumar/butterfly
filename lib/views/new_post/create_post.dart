@@ -3,6 +3,7 @@ import 'package:butterfly/config/styles.dart';
 import 'package:butterfly/models/post.dart';
 import 'package:butterfly/models/tag.dart';
 import 'package:butterfly/view_models/new_post/create_post_view_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -122,6 +123,7 @@ class CreatePostPage extends StatelessWidget {
           final question = _questionController.text;
           final description = _descriptionController.text;
           final post = Post(
+            authorId: FirebaseAuth.instance.currentUser.uid,
             title: question,
             description: description,
             category: tag,

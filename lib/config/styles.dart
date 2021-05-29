@@ -23,8 +23,13 @@ class BrandStyles {
     color: BrandColors.black,
   );
   static final TextStyle subtitle = GoogleFonts.inter(
-    fontSize: 16,
+    fontSize: 14,
     color: BrandColors.black,
+  );
+  static final TextStyle subtitleBold = GoogleFonts.inter(
+    fontSize: 14,
+    color: BrandColors.black,
+    fontWeight: FontWeight.bold,
   );
 
   static final ThemeData themeData = ThemeData(
