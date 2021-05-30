@@ -1,9 +1,11 @@
 import 'package:butterfly/config/colors.dart';
 import 'package:butterfly/models/doctors_page.dart';
+import 'package:butterfly/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SessionScreen extends StatefulWidget {
   @override
@@ -25,9 +27,8 @@ class _SessionScreenState extends State<SessionScreen> {
               child: Text(
                 "Consult a doctor",
                 textAlign: TextAlign.left,
-                style: TextStyle(
+                style: GoogleFonts.inter(
                     color: BrandColors.blue,
-                    fontFamily: 'BrandIcons',
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
@@ -58,8 +59,7 @@ class _SessionScreenState extends State<SessionScreen> {
                             offset: Offset(-16, 0),
                             child: Text(
                               doctorsDetails[index].name,
-                              style: TextStyle(
-                                fontFamily: "BrandIcons",
+                              style: GoogleFonts.inter(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -75,9 +75,8 @@ class _SessionScreenState extends State<SessionScreen> {
                                       const EdgeInsets.fromLTRB(0, 0, 0, 2),
                                   child: Text(
                                     doctorsDetails[index].role,
-                                    style: TextStyle(
+                                    style: GoogleFonts.inter(
                                       color: BrandColors.black,
-                                      fontFamily: "BrandIcons",
                                       fontSize: 14,
                                     ),
                                   ),
@@ -87,9 +86,8 @@ class _SessionScreenState extends State<SessionScreen> {
                                       const EdgeInsets.fromLTRB(0, 0, 0, 2),
                                   child: Text(
                                     doctorsDetails[index].experience,
-                                    style: TextStyle(
+                                    style: GoogleFonts.inter(
                                       color: BrandColors.black,
-                                      fontFamily: "BrandIcons",
                                       fontSize: 14,
                                     ),
                                   ),
@@ -107,9 +105,8 @@ class _SessionScreenState extends State<SessionScreen> {
                                       ),
                                       Text(
                                         "${doctorsDetails[index].rating}%",
-                                        style: TextStyle(
+                                        style: GoogleFonts.inter(
                                           color: BrandColors.black,
-                                          fontFamily: "BrandIcons",
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
                                         ),
@@ -120,9 +117,8 @@ class _SessionScreenState extends State<SessionScreen> {
                                       ),
                                       Text(
                                         doctorsDetails[index].location,
-                                        style: TextStyle(
+                                        style: GoogleFonts.inter(
                                           color: BrandColors.black,
-                                          fontFamily: "BrandIcons",
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
                                         ),
@@ -145,7 +141,7 @@ class _SessionScreenState extends State<SessionScreen> {
                                   offset: Offset(-16, -8),
                                   child: Icon(
                                     Icons.verified,
-                                    color: BrandColors.white,
+                                    color: BrandColors.lightBlue,
                                   ),
                                 ),
                           isThreeLine: true,
@@ -160,9 +156,8 @@ class _SessionScreenState extends State<SessionScreen> {
                                 children: [
                                   Text(
                                     "Availability",
-                                    style: TextStyle(
+                                    style: GoogleFonts.inter(
                                       color: BrandColors.blue,
-                                      fontFamily: 'BrandIcons',
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -177,9 +172,8 @@ class _SessionScreenState extends State<SessionScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
                                           doctorsDetails[index].timing,
-                                          style: TextStyle(
+                                          style: GoogleFonts.inter(
                                             color: BrandColors.blue,
-                                            fontFamily: 'BrandIcons',
                                           ),
                                         ),
                                       )
@@ -205,30 +199,23 @@ class _SessionScreenState extends State<SessionScreen> {
                                   )
                                 ],
                               ),
-                              GestureDetector(
-                                onTap: () => {
-                                  //TODO: Book Video Call Button
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                    color: BrandColors.blue,
-                                  ),
-                                  height: 56,
-                                  width: 203,
-                                  child: Text(
-                                    "Book Video Call",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: BrandColors.white,
-                                      fontFamily: 'BrandIcons',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                              MaterialButton(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 24, vertical: 12),
+                                shape: ContinuousRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
+                                color: BrandColors.blue,
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, RouteNames.bookingScreen);
+                                },
+                                child: Text("Book Video Call",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                      color: BrandColors.white,
+                                      fontSize: 16,
+                                    )),
                               )
                             ],
                           ),

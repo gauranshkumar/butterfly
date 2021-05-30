@@ -5,4 +5,5 @@ class RouteNames {
   static const albumPage = 'albumPage';
   static const commentPage = 'commentPage';
   static const takeTest = 'takeTest';
+  static const bookingScreen = 'bookingScreen';
 }

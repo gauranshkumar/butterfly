@@ -13,6 +13,7 @@ import 'package:butterfly/views/login/login_page.dart';
 import 'package:butterfly/views/music/album_screen.dart';
 import 'package:butterfly/views/new_post/create_post.dart';
 import 'package:butterfly/views/psy_tests/take_test.dart';
+import 'package:butterfly/views/sessions/booking_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -75,6 +76,9 @@ class Routes {
         );
       case RouteNames.takeTest:
         return CustomRoute<bool>(builder: (BuildContext context) => TakeTest());
+      case RouteNames.bookingScreen:
+        return CustomRoute<bool>(
+            builder: (BuildContext context) => BookingScreen());
       default:
         return onUnknownRoute(const RouteSettings(name: '/invalid'));
     }
