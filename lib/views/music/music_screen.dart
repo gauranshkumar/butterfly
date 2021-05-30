@@ -25,6 +25,7 @@ class _CardState extends State<Card> {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: StaggeredGridView.countBuilder(
+          physics: BouncingScrollPhysics(),
           crossAxisCount: 2,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,

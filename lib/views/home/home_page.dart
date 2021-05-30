@@ -5,6 +5,7 @@ import 'package:butterfly/models/user.dart';
 import 'package:butterfly/view_models/user/user_view_model.dart';
 import 'package:butterfly/views/feed/feed_screen.dart';
 import 'package:butterfly/views/music/music_screen.dart';
+import 'package:butterfly/views/music/player.dart';
 import 'package:butterfly/views/profile/profile_screen.dart';
 import 'package:butterfly/views/psy_tests/psychology_test.dart';
 import 'package:butterfly/views/sessions/sessions.dart';
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
     return <Widget>[
       FeedScreen(),
       PsychoTests(),
-      MusicScreen(),
+      Player(),
       SessionScreen(),
       ProfileScreen(),
     ];
