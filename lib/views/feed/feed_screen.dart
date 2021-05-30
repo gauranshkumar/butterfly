@@ -13,7 +13,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class FeedScreen extends StatelessWidget {
-  TextEditingController _commentController = TextEditingController();
   Size size;
   @override
   Widget build(BuildContext context) {
@@ -82,7 +81,7 @@ class FeedScreen extends StatelessWidget {
                           children: [
                             ProfileIcon(snapshot.data.name),
                             SizedBox(width: 6),
-                            Text(snapshot.data.name),
+                            Text('Anonymous User'),
                             Spacer(),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 8),
@@ -120,6 +119,8 @@ class FeedScreen extends StatelessWidget {
           ),
           _activityOnPost(feedItem, supportStyle, appreciateStyle, context),
           Consumer<UserViewModel>(builder: (context, user, child) {
+            final TextEditingController _commentController =
+                new TextEditingController();
             return Row(
               mainAxisSize: MainAxisSize.min,
               children: [
