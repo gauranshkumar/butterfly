@@ -133,7 +133,7 @@ class CreatePostPage extends StatelessWidget {
           );
           final isPostSuccess = createPostViewModel.postQuestion(post);
           if (isPostSuccess) {
-            Fluttertoast.showToast(msg: "Succesfully posted ✅");
+            Fluttertoast.showToast(msg: "Succesfully posted 😄");
             Navigator.pop(context);
           }
         }

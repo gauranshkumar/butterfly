@@ -1,8 +1,6 @@
-// To parse this JSON data, do
-//
-//     final analysis = analysisFromMap(jsonString);
-
 import 'dart:convert';
+
+import 'package:sentiment_dart/sentiment_dart.dart';
 
 Analysis analysisFromMap(String str) => Analysis.fromMap(json.decode(str));
 
@@ -14,11 +12,13 @@ class Analysis {
     this.comparative,
   });
 
+  static final _sentiment = Sentiment();
+
   final int score;
   final double comparative;
 
   factory Analysis.fromMap(Map<String, dynamic> json) => Analysis(
-        score: json["score"],
+        score: (json["score"] as int) + 5,
         comparative: json["comparative"].toDouble(),
       );
 
@@ -26,4 +26,9 @@ class Analysis {
         "score": score,
         "comparative": comparative,
       };
+
+  factory Analysis.fromText(String text) {
+    final data = _sentiment.analysis(text, emoji: true);
+    return Analysis.fromMap(data);
+  }
 }
