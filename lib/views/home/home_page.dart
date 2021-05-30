@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
     return <Widget>[
       FeedScreen(),
       PsychoTests(),
-      Player(),
+      MusicScreen(),
       SessionScreen(),
       ProfileScreen(),
     ];

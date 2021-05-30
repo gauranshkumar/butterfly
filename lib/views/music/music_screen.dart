@@ -59,14 +59,15 @@ class _CardState extends State<Card> {
                       ),
                     ),
                     SizedBox(
-                        height: 34,
-                        child: Text(
-                          cards[index].subTitle,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: BrandColors.black,
-                          ),
-                        ))
+                      height: 34,
+                      child: Text(
+                        cards[index].subTitle,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: BrandColors.black,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

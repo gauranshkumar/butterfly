@@ -11,6 +11,7 @@ import 'package:butterfly/views/feed/widgets/comment_screen.dart';
 import 'package:butterfly/views/home/home_page.dart';
 import 'package:butterfly/views/login/login_page.dart';
 import 'package:butterfly/views/music/album_screen.dart';
+import 'package:butterfly/views/music/player.dart';
 import 'package:butterfly/views/new_post/create_post.dart';
 import 'package:butterfly/views/psy_tests/take_test.dart';
 import 'package:butterfly/views/sessions/booking_screen.dart';
@@ -79,6 +80,8 @@ class Routes {
       case RouteNames.bookingScreen:
         return CustomRoute<bool>(
             builder: (BuildContext context) => BookingScreen());
+      case RouteNames.musicPlayer:
+        return CustomRoute<bool>(builder: (BuildContext context) => Player());
       default:
         return onUnknownRoute(const RouteSettings(name: '/invalid'));
     }
