@@ -1,6 +1,6 @@
-# butterfly
+# Butterfly
 
-A new Flutter project.
+<img src=".\public\Butterfly-Mental Health App.png" alt="Butterfly-Mental Health App" style="zoom:150%;" />
 
 ## Getting Started
 
